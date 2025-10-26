@@ -808,11 +808,11 @@
 
         async function buyZorro(event) {
             try {
-                console.log("🔍 Reconnecting wallet...");
-                const accountsCurrent = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                const userAddressCurrent = accountsCurrent[0];
-                alert(`🔗 Ví hiện tại: ${userAddressCurrent}`);
-                console.log("Active wallet:", userAddressCurrent);
+                // console.log("🔍 Reconnecting wallet...");
+                // const accountsCurrent = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                // const userAddressCurrent = accountsCurrent[0];
+                // alert(`🔗 Ví hiện tại: ${userAddressCurrent}`);
+                // console.log("Active wallet:", userAddressCurrent);
                 // Check if Viem is loaded
                 if (typeof window.viem === 'undefined') {
                     alert('Loading Web3 library... Please refresh the page and try again.');
