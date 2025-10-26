@@ -960,57 +960,6 @@
                 }
             }
         }
-    // === Detect wallet or network change ===
-if (window.ethereum) {
-    // Khi người dùng đổi ví trong MetaMask
-    window.ethereum.on("accountsChanged", async (accounts) => {
-        if (accounts.length === 0) {
-            alert("❌ Ví đã ngắt kết nối.");
-        } else {
-            const newAddress = accounts[0];
-            console.log("🔁 Switched wallet:", newAddress);
-            alert(`🔁 Bạn vừa đổi sang ví: ${newAddress}`);
-
-            // Cập nhật số dư USDC mới ngay sau khi đổi ví
-            try {
-                const { createPublicClient, http, formatUnits, base } = window.viem;
-                const publicClient = createPublicClient({
-                    chain: base,
-                    transport: http()
-                });
-                const USDC_ADDRESS = '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913';
-                const USDC_ABI = [
-                    {
-                        name: 'balanceOf',
-                        type: 'function',
-                        stateMutability: 'view',
-                        inputs: [{ name: 'account', type: 'address' }],
-                        outputs: [{ name: '', type: 'uint256' }]
-                    }
-                ];
-
-                const balance = await publicClient.readContract({
-                    address: USDC_ADDRESS,
-                    abi: USDC_ABI,
-                    functionName: 'balanceOf',
-                    args: [newAddress]
-                });
-
-                alert(`💰 Số dư hiện tại: ${formatUnits(balance, 6)} USDC`);
-            } catch (err) {
-                console.error("Balance update error:", err);
-            }
-        }
-    });
-
-    // Khi người dùng đổi network (VD từ Ethereum sang Base)
-    window.ethereum.on("chainChanged", (chainId) => {
-        console.log("🔗 Network changed to:", chainId);
-        alert(`🌐 Network changed. ChainID: ${chainId}`);
-        window.location.reload(); // reload để cập nhật chain mới
-    });
-}
-
     </script>
 </body>
 </html>
