@@ -1,0 +1,18 @@
+{
+  "scripts": {
+    "start": "tsx server.ts",
+    "dev": "tsx watch server.ts",
+    "tunnel": "cloudflared tunnel --url http://localhost:4021",
+    "start:all": "./start.sh"
+  },
+  "dependencies": {
+    "@coinbase/x402": "^0.6.6",
+    "@uniswap/sdk-core": "^7.8.0",
+    "@uniswap/universal-router-sdk": "^4.20.0",
+    "@uniswap/v4-sdk": "^1.22.0",
+    "dotenv": "^17.2.3",
+    "ethers": "5.8.0",
+    "express": "^5.1.0",
+    "x402-express": "^0.6.5"
+  }
+}

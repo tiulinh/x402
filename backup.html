@@ -782,7 +782,7 @@
         // X402 Payment Integration
         const X402_ENDPOINT = 'https://www.zorro.team/buy';
         const USDC_ADDRESS = '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913';
-        const PAYTO_ADDRESS = '0xd7C9385DB578B4F745642905eeBebF0Aa21B6F12';
+        const PAYTO_ADDRESS = '0xa775f907a20FA01f3C02b0aA0BFbD9D70Ba80F83';
         const AMOUNT = 2000000n; // 2 USDC (6 decimals) as BigInt
 
         // USDC ABI (minimal)
@@ -917,20 +917,18 @@
 
                     if (result.success) {
                         buyButton.innerHTML = '✅ Success!';
-                        // alert(`🎉 Congratulations! You've successfully minted 10,000 $ZORRO tokens!\n\nTransaction: ${hash}`);
+                        alert(`🎉 Congratulations! You've successfully minted 10,000 $ZORRO tokens!\n\nTransaction: ${hash}`);
 
                         // View on block explorer
-                        // if (confirm('View transaction on BaseScan?')) {
-                        //     window.open(`https://basescan.org/tx/${hash}`, '_blank');
-                        // }
-
-                        console.log(`✅ Success! Transaction: ${hash}`);
+                        if (confirm('View transaction on BaseScan?')) {
+                            window.open(`https://basescan.org/tx/${hash}`, '_blank');
+                        }
                     } else {
                         throw new Error(result.message || 'Payment verification failed');
                     }
                 } catch (apiError) {
                     console.error('X402 API Error:', apiError);
-                    // alert(`Transaction sent but verification pending.\nTx: ${hash}\n\nPlease contact support if tokens don't arrive.`);
+                    alert(`Transaction sent but verification pending.\nTx: ${hash}\n\nPlease contact support if tokens don't arrive.`);
                 }
 
                 // Reset button after 3 seconds
@@ -951,7 +949,7 @@
                     errorMessage += error.message || 'Please try again.';
                 }
 
-                // alert(errorMessage);
+                alert(errorMessage);
 
                 // Reset button
                 if (event && event.target) {

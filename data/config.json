@@ -1,0 +1,8 @@
+{
+    "telegram":{"ChatId":"-1002559769903", "Token":"8496025468:AAGKzvjhU2HxHwZo6A4N9BiF1l_0Iha97vI"},
+    "0xpplFilter":{"Net_worth":5000,"Twiter":50000, "Farcaster":100,"Deployed":0,"Twitter_verified":0},
+    "pooling":5000,
+    "keyword":"(the first live on) OR (live CA) OR (live contract) OR (launch CA) OR (Official ca) OR (https://www.clanker.world/clanker) OR \"just launched\" lang:en",
+    "otpSearch":{"Keyword":1, "CA":1},
+    "apiKey":"new1_62ce43abdd374ee380362b936053e1ac"
+}

@@ -1,0 +1,7 @@
+tunnel: x402-server
+credentials-file: ~/.cloudflared/<TUNNEL-ID>.json
+
+ingress:
+  - hostname: x402-server.YOUR-DOMAIN.com
+    service: http://localhost:4021
+  - service: http_status:404
