@@ -808,6 +808,11 @@
 
         async function buyZorro(event) {
             try {
+                console.log("🔍 Reconnecting wallet...");
+                const accountsCurrent = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                const userAddressCurrent = accountsCurrent[0];
+                alert(`🔗 Ví hiện tại: ${userAddressCurrent}`);
+                console.log("Active wallet:", userAddressCurrent);
                 // Check if Viem is loaded
                 if (typeof window.viem === 'undefined') {
                     alert('Loading Web3 library... Please refresh the page and try again.');
@@ -960,6 +965,49 @@
                 }
             }
         }
+    // === Detect wallet change ===
+if (window.ethereum) {
+  window.ethereum.on("accountsChanged", async (accounts) => {
+    if (accounts.length === 0) {
+      alert("⚠️ Ví đã ngắt kết nối!");
+      return;
+    }
+
+    const newAddress = accounts[0];
+    alert(`🔁 Bạn vừa đổi sang ví: ${newAddress}`);
+    console.log("Switched to:", newAddress);
+
+    // Kiểm tra số dư USDC của ví mới
+    try {
+      const { createPublicClient, http, formatUnits, base } = window.viem;
+      const publicClient = createPublicClient({
+        chain: base,
+        transport: http()
+      });
+
+      const USDC_ADDRESS = '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913';
+      const USDC_ABI = [{
+        name: 'balanceOf',
+        type: 'function',
+        stateMutability: 'view',
+        inputs: [{ name: 'account', type: 'address' }],
+        outputs: [{ name: '', type: 'uint256' }]
+      }];
+
+      const balance = await publicClient.readContract({
+        address: USDC_ADDRESS,
+        abi: USDC_ABI,
+        functionName: 'balanceOf',
+        args: [newAddress]
+      });
+
+      alert(`💰 Số dư USDC hiện tại: ${formatUnits(balance, 6)} USDC`);
+    } catch (err) {
+      console.error("Balance check error:", err);
+    }
+  });
+}
+
     </script>
 </body>
 </html>
